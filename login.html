@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Estilos simples para a página de login */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="return login(event)">
+        <input type="text" id="username" placeholder="Usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <p id="error-message" style="color: red; display: none;">Usuário ou senha incorretos</p>
+</div>
+
+<script>
+    function login(event) {
+        event.preventDefault(); // Impede o envio do formulário padrão
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Validação simples de exemplo
+        if (username === "usuario" && password === "1234") {
+            // Redireciona para a página "home.html"
+            window.location.href = "home.html";
+        } else {
+            document.getElementById('error-message').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
