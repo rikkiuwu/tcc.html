@@ -63,6 +63,21 @@
         event.preventDefault(); // Impede o envio do formulário padrão
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+        const https = require('https');
+       const https = require('https');
+        
+const fs = require('fs');
+const express = require('express');
+const app = express();
+
+const server = https.createServer({
+    key: fs.readFileSync('caminho/para/chave.pem'),
+    cert: fs.readFileSync('caminho/para/certificado.pem')
+}, app);
+
+server.listen(443, () => {
+    console.log('Servidor seguro rodando em HTTPS');
+});
 
         // Validação simples de exemplo
         if (username === "usuario" && password === "1234") {
