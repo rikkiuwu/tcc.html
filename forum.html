@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grêmio Estudantil</title>
+    <link rel="stylesheet" href="css/EstiloForum.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+header img {
+    max-width: 50px;
+    vertical-align: middle;
+}
+nav {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.banner {
+    background-color: #2E8B57;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+.banner h1 {
+    margin: 0;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+.section {
+    background-color: white;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.section h2 {
+    margin-top: 0;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+
+}
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container > h2 {
+    background-color: white;
+    padding: 10px 0;    
+}
+.thread{
+    padding: 10px;
+    border: 1px dashed white;
+  
+}
+.respostas{
+    margin: 0 10 px;
+}
+.respostas p{
+    font-size: 18px;
+    color: black;
+}
+textarea{
+    width: 100%;
+    height: 40px;
+    border: 1px solid white;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.comment {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.comments-section {
+    margin-top: 20px;
+}
+</style>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo do Grêmio">
+        <h1>Grêmio Estudantil</h1>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="destaques.html">Alunos Destaque</a>
+        <a href="forum.html">Fórum</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+    <div class="banner">
+        <h1>Forum</h1>
+        <p>Debata temas relacionadas ao Gremio com outros usuarios</p>
+    </div>
+    <h1>Fórum de Discussão</h1>
+    <div>
+        <input type="text" id="username" placeholder="Seu nome" required>
+        <textarea id="comment" placeholder="Digite seu comentário" required></textarea>
+        <button onclick="addComment()">Adicionar Comentário</button>
+    </div>
+
+    <div class="comments-section" id="comments-section">
+        <h2>Comentários</h2>
+    </div>
+
+    <script>
+        function addComment() {
+            const username = document.getElementById('username').value;
+            const commentText = document.getElementById('comment').value;
+            const commentsSection = document.getElementById('comments-section');
+
+            if (username && commentText) {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.innerHTML = `<strong>${username}</strong>: ${commentText}`;
+                commentsSection.appendChild(commentDiv);
+
+                // Limpa os campos
+                document.getElementById('username').value = '';
+                document.getElementById('comment').value = '';
+            } else {
+                alert('Por favor, preencha seu nome e comentário.');
+            }
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
+    </footer>
+    <script src="js/teste1.js"></script>
+</body>
+</html>
