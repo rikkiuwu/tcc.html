@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="css/EstiloHome.css">
 </head>
 <style>
-    body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 header {
-    background-color: #4CAF50;
+    background-color: hwb(0 86% 14%);
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -77,6 +77,22 @@ footer {
     padding: 10px 0;
     margin-top: 20px;
 }
+.redirect-box {
+            border: 2px solid #007BFF;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            cursor: pointer; /* Torna a caixa clicável */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .redirect-box:hover {
+            background-color: #e6f7ff;
+            transform: scale(1.02); /* Efeito de zoom ao passar o mouse */
+        }
 </style>
 <body>
     <header>
@@ -95,23 +111,36 @@ footer {
         <h1>Bem-vindos ao site do Grêmio Estudantil!</h1>
         <p>Fique por dentro de todos os eventos e projetos da escola</p>
     </div>
-    <div class="container">
-        <div class="section" id="inEventos" >
-            <h2>Próximos Eventos</h2>
-            <p>Acompanhe os eventos que estão por vir e não perca nenhuma atividade!</p>
-        </div>
-        <div class="section">
-            <h2>Projetos em Destaque</h2>
-            <p>Conheça os projetos mais importantes que estamos desenvolvendo no momento.</p>
-        </div>
-        <div class="section">
-            <h2>Alunos Destaque</h2>
-            <p>Veja quem são os alunos com as melhores notas e maior destaque na escola.</p>
-        </div>
-    </div>
+
+    <section class="redirect-box" data-url="eventos.html">
+        <h1>Próximos Eventos</h1>
+        <p>Acompanhe os eventos que estão por vir e não perca nenhuma atividade!</p>
+    </section>
+    <section class="redirect-box" data-url="projetos.html">
+        <h1>Projetos em Destaque</h1>
+        <p>Conheça os projetos mais importantes que estamos desenvolvendo no momento.</p>
+    </section>
+    <section class="redirect-box" data-url="destaques.html">
+        <h1>Alunos Destaque</h1>
+        <p>Veja quem são os alunos com as melhores notas e maior destaque na escola.</p>
+    </section>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
-    <script src="js/home.js"></script>
+    <script>
+         // Obtém todas as caixas com a classe "redirect-box"
+const redirectBoxes = document.querySelectorAll('.redirect-box');
+
+// Adiciona um evento de clique a cada caixa
+redirectBoxes.forEach(box => {
+    box.addEventListener('click', function() {
+        // Obtém o URL armazenado no atributo "data-url" da caixa
+        const url = box.getAttribute('data-url');
+        if (url) {
+            window.location.href = url; // Redireciona para a URL
+        }
+    });
+});
+    </script>
 </body>
 </html>
