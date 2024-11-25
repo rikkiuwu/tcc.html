@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,7 @@
         }
         .login-container {
             width: 300px;
-            padding: 20px;
+            padding: 25px;
             border: 1px solid #ddd;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -34,7 +35,7 @@
             width: 100%;
             padding: 10px;
             border: none;
-            background-color: #4CAF50;
+            background-color: #011002;
             color: white;
             font-size: 16px;
             cursor: pointer;
@@ -43,34 +44,55 @@
         button:hover {
             background-color: #45a049;
         }
+        .sxs{font-size: 1.1rem;}
+        .fic{align-self: center;}
     </style>
 </head>
 <body>
-
-<div class="login-container">
-    <h2>Login</h2>
+<div class="login-container" style="width: 380px; height: 590px;">
+    <h1>H.I.D.C</h1>
+    <h3>Grêmio Estudantil</h3>
+    <div class="fic">Para entrar, utilize o mesmo login da SED</div><br></br>
     <form onsubmit="return login(event)">
-        <input type="text" id="username" placeholder="Usuário" required>
-        <input type="password" id="password" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
+        <div>
+        <input type="text" id="ra" placeholder="RA" style="text-align: left;width: 235px;" required>
+        <input type="text" id="digito" placeholder="Dígito" style="text-align: left;width: 35px;" required>-
+        <select name="estados" id="" style="border: none;background-color: #FFFFFF; width:50px;height:30x;">
+            <option value="sp">SP</option>
+            <option value="rj">RJ</option>
+            <option value="mg">MG</option>
+            <option value="ba">BA</option>
+            <option value="es">ES</option>
+            <option value="df">DF</option>
+        </select>
+        </div>
+        <input type="password" id="password" placeholder="Senha" style="width: 360px;" required><br></br>
+        <button type="submit" style="width: 117px;background-color: #325794;">Entrar</button><br></br>
+        <button type="submit" style="width: 117px;border: 4px; color: #325794; background-color: #FFFFFF; ">Voltar</button>
     </form>
     <p id="error-message" style="color: red; display: none;">Usuário ou senha incorretos</p>
 </div>
 
 <script>
     function login(event) {
-        event.preventDefault(); // Impede o envio do formulário padrão
-        const username = document.getElementById('username').value;
+        event.preventDefault();
+        const username = document.getElementById('ra').value;
         const password = document.getElementById('password').value;
 
-        // Validação simples de exemplo
-        if (username === "usuario" && password === "1234" || username === "Usuário" && password === "1234") {
-            // Redireciona para a página "home.html"
-            window.location.href = "home.html";
-        } else {
-            document.getElementById('error-message').style.display = 'block';
-        }
+        const users = [
+        { username: "usuario1", password: "1234" },
+        { username: "usuario2", password: "abcd" },
+        { username: "admin", password: "admin123" }
+    ];
+
+    const validUser = users.find(user => user.username === username && user.password === password);
+    if (validUser) {
+        // Redireciona para a página "home.html"
+        window.location.href = "home.html";
+    } else {
+        document.getElementById('error-message').style.display = 'block';
     }
+}
 </script>
 
 </body>
