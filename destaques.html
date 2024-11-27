@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grêmio Estudantil</title>
-    <link rel="stylesheet" href="css/EstiloDestaque.css">
 </head>
 <style>
-    body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
-header {
-    background-color: #4CAF50;
+.gremio {
+    background-color: hwb(0 86% 14%);
     color: white;
-    padding: 10px 0;
+    padding: 31px 20px;
     text-align: center;
-}
-header img {
-    max-width: 50px;
-    vertical-align: middle;
 }
 nav {
     background-color: #333;
@@ -44,7 +39,7 @@ nav a::after{
     position: relative;
 }
 .banner {
-    background-color: red;
+    background-color: skyblue;
     color: white;
     text-align: center;
     padding: 50px 20px;
@@ -76,12 +71,131 @@ footer {
     padding: 10px 0;
     margin-top: 20px;
 }
+
+
+*{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Arial";
+        }
+        
+        header{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2%;
+        }
+        
+        header div.galeria{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        header div.galeria div.single-galeria{
+            position: relative;
+            width: 20%;
+            height: 100%;
+            margin: 0 5px;
+            transition: width 1s;
+        }
+        
+        header div.galeria div.single-galeria:first-child{
+            width: 35% !important;
+        }
+        
+        header div.galeria:hover div.single-galeria:first-child{
+            width: 20% !important;
+        }
+        
+        header div.galeria div.single-galeria:hover{
+            width: 35% !important;
+        }
+        
+        header div.galeria div.single-galeria:first-child:hover{
+            width: 35% !important;
+        }
+        
+        
+        header div.galeria div.single-galeria img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        header div.galeria div.single-galeria div.info{
+            position: absolute;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 65%, transparent);
+            padding: 16% 8%;
+            bottom: 0;
+        }
+        
+        header div.galeria div.single-galeria div.info h1{
+            font-size: 26px;
+            color: white;
+        }
+        
+        header div.galeria div.single-galeria div.info p{
+            font-size: 14px;
+            line-height: 28px;
+            color: white;
+        }
+        
+        header div.galeria div.single-galeria div.info a{
+            font-size: 14px;
+            line-height: 28px;
+            color: gold;
+            text-decoration: none;
+        }
+        
+        header div.galeria div.single-galeria div.info a:hover{
+            text-decoration: underline;
+        }
+        
+        section{
+            width: 100%;
+            height: 100vh;
+            padding: 8%;
+            display: grid;
+            place-items: center;
+            background-color: rgb(250,250,250);
+        }
+        
+        section p{
+            color: rgb(100,100,100);
+            font-size: 22px;
+            line-height: 32px;
+        }
+        
+        
+        @media screen and (max-width: 764px){
+        
+            header div.galeria{
+                width: 100%;
+                height: 70vh;
+                justify-content: flex-start;
+                overflow-x: scroll;
+            }
+            
+            header div.galeria div.single-galeria{
+                min-width: 90% !important;
+            }
+        
+        }
+nav a:hover {
+    color: blue;
+    text-decoration: underline;
+}
 </style>
 <body>
-    <header>
-        <img src="logo" alt="Logo do Grêmio">
+    <div class="gremio">
         <h1>Grêmio Estudantil</h1>
-    </header>
+    </div>
     <nav>
         <a href="home.html">Home</a>
         <a href="eventos.html">Eventos</a>
@@ -94,60 +208,70 @@ footer {
         <h1>Destaques</h1>
         <p>Veja os alunos destaques da sua escola!</p>
     </div>
-    <header>
-        <h1>Grêmio Gallery</h1>
-    </header>
-    <main>
-        <div class="gallery-container">
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Primeira Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Terceira Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Quarta Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Quinta Foto">
-            </a>
-            <br></br>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Sexta Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Sétima Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Oitava Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Nona Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Décima Foto">
-            </a>
-            <br></br>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-            <a href="img/user.png" class="gallery-items">
-                <img src="img/user.png" alt="Segunda Foto">
-            </a>
-        </div>
-    </main>
+        <header>
+            <div class="galeria">
+              
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+
+                <div class="single-galeria">
+                    <img src="img/alunosD.jpeg" alt="">
+                    <div class="info">
+                        <h1>Título</h1>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam labore.</p>
+                        <a href="#">Ver Mais</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section>
+            <p>
+                Alunos que apresentaram as melhores notas do ensino médio da escola Ana Maria Pagiossi(AMP).
+            </p>
+        </section>
+
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
