@@ -163,6 +163,30 @@ button:hover {
 
 }
 
+.comment {
+    display: flex;
+    justify-content: space-between; /* Distribui o conteúdo: texto à esquerda, botão à direita */
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #004080;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
 </style>
 <body>
     <header>
@@ -181,12 +205,11 @@ button:hover {
         <p>Debata temas relacionadas ao Gremio com outros usuarios</p>
     </div>
     
-    <div class="forum">
-        <h1>Fórum de Discussão</h1>
-        <input type="text" id="username" placeholder="Seu nome" required>
-        <textarea id="comment" placeholder="Digite seu comentário" required></textarea>
-        <button onclick="addComment()">Adicionar Comentário</button>
-    </div>
+        <div class="forum">
+            <h1>Fórum de Discussão</h1>
+            <textarea id="comment" placeholder="Digite seu comentário" required></textarea>
+            <button onclick="addComment()">Adicionar Comentário</button>
+        </div>
 
     <div class="comments-section forum" id="comments-section">
         <h2>Comentários</h2>
@@ -194,52 +217,79 @@ button:hover {
     </div>
 
     <script>
-         function addComment() {
-    const username = document.getElementById('username').value;
-    const commentText = document.getElementById('comment').value;
+   // Função para carregar os comentários armazenados no Local Storage
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
     const commentsSection = document.getElementById('comments-section');
+
+    // Limpa a seção de comentários antes de adicionar os novos
+    commentsSection.innerHTML = '<h2>Comentários</h2>';
+
+    comments.forEach((comment, index) => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+        commentDiv.innerHTML = `
+            <div>
+                <strong>${comment.username}</strong> (${comment.date}): ${comment.text}
+            </div>
+            <button class="delete-button" onclick="deleteComment(${index})">Excluir</button>
+        `;
+        commentsSection.appendChild(commentDiv);
+    });
+}
+
+// Função para adicionar um novo comentário e salvar no Local Storage
+function addComment() {
+    const username = localStorage.getItem('ra'); // Recupera o nome do usuário do Local Storage
+    const commentText = document.getElementById('comment').value;
 
     if (username && commentText) {
         const currentDateTime = new Date().toLocaleString();
-        const commentDiv = document.createElement('div');
-        commentDiv.className = 'comment';
-        commentDiv.innerHTML = `<strong>${username}</strong> (${currentDateTime}): ${commentText}`;
-        commentsSection.appendChild(commentDiv);
 
-        document.getElementById('username').value = '';
+        // Cria o objeto do comentário
+        const newComment = {
+            username: username,
+            text: commentText,
+            date: currentDateTime
+        };
+
+        // Pega os comentários do Local Storage, ou um array vazio se não houver
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        
+        // Adiciona o novo comentário
+        comments.push(newComment);
+
+        // Salva os comentários no Local Storage
+        localStorage.setItem('comments', JSON.stringify(comments));
+
+        // Atualiza a seção de comentários
+        loadComments();
+
+        // Limpa os campos
         document.getElementById('comment').value = '';
     } else {
-        alert('Por favor, preencha seu nome e comentário.');
+        alert('Erro: Nome de usuário não encontrado ou comentário vazio.');
     }
 }
 
-commentsSection.insertBefore(commentDiv, commentsSection.firstChild);
-
-function likeComment(button) {
-    const likes = button.previousElementSibling;
-    likes.textContent = parseInt(likes.textContent) + 1;
+// Função para excluir um comentário
+function deleteComment(index) {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.splice(index, 1); // Remove o comentário do array
+    localStorage.setItem('comments', JSON.stringify(comments)); // Atualiza o Local Storage
+    loadComments(); // Recarrega os comentários
 }
 
-
-    
-        function addComment() {
-            const username = document.getElementById('username').value;
-            const commentText = document.getElementById('comment').value;
-            const commentsSection = document.getElementById('comments-section');
-
-            if (username && commentText) {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                commentDiv.innerHTML = `<strong>${username}</strong>: ${commentText}`;
-                commentsSection.appendChild(commentDiv);
-
-                // Limpa os campos
-                document.getElementById('username').value = '';
-                document.getElementById('comment').value = '';
-            } else {
-                alert('Por favor, preencha seu nome e comentário.');
-            }
-        }
+// Carrega os comentários quando a página for carregada
+window.onload = () => {
+    const username = localStorage.getItem('ra');
+    if (!username) {
+        alert('Erro: Nome de usuário não encontrado. Faça login novamente.');
+        window.location.href = 'login.html'; // Redireciona para a página de login
+    } else {
+        loadComments();
+    }
+};
     </script>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
