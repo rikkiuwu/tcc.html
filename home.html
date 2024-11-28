@@ -97,8 +97,30 @@ nav a:hover {
     color: blue;
     text-decoration: underline;
 }
+
+#customAlert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alert-box {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 </style>
 <body>
+    
     <header>
         <img src="img/logo.jpeg" alt="Logo do Grêmio">
         <h1>Grêmio Estudantil</h1>
@@ -111,11 +133,16 @@ nav a:hover {
         <a href="forum.html">Fórum</a>
         <a href="contato.html">Contato</a>
     </nav>
+    <div id="customAlert" style="display: none;">
+        <div class="alert-box">
+          <p id="alertMessage">Mensagem personalizada aqui!</p>
+          <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
     <div class="banner">
         <h1>Bem-vindos ao site do Grêmio Estudantil!</h1>
         <p>Fique por dentro de todos os eventos e projetos da escola</p>
     </div>
-
     <section class="redirect-box" data-url="eventos.html">
         <h1>Próximos Eventos</h1>
         <p>Acompanhe os eventos que estão por vir e não perca nenhuma atividade!</p>
@@ -145,6 +172,24 @@ redirectBoxes.forEach(box => {
         }
     });
 });
+let nome = localStorage.getItem('ra');
+        document.addEventListener('DOMContentLoaded', () => {
+  const username = localStorage.getItem('ra'); // Recupera o username
+});
+function showAlert(message) {
+  // Define a mensagem
+  document.getElementById('alertMessage').textContent = message;
+  // Exibe o alerta
+  document.getElementById('customAlert').style.display = 'flex';
+}
+
+function closeAlert() {
+  // Oculta o alerta
+  document.getElementById('customAlert').style.display = 'none';
+}
+
+// Exemplo de uso
+showAlert('Bem-vindo(a), '+ nome + '!');
     </script>
 </body>
 </html>
