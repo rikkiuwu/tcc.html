@@ -5,7 +5,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grêmio Estudantil</title>
     <link rel="stylesheet" href="css/EstiloForum.css">
+    <link rel="stylesheet" href="css/EstiloHome.css">
 </head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: hwb(0 86% 14%);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+header img {
+    max-width: 50px;
+    vertical-align: middle;
+}
+nav {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.banner {
+    background-color: skyblue;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+.banner h1 {
+    margin: 0;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+.section {
+    background-color: white;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.section h2 {
+    margin-top: 0;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 0px;
+
+}
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container > h2 {
+    background-color: white;
+    padding: 10px 0;    
+}
+.thread{
+    padding: 10px;
+    border: 1px dashed white;
+  
+}
+.respostas{
+    margin: 0 10 px;
+}
+.respostas p{
+    font-size: 18px;
+    color: black;
+}
+textarea{
+    width: 100%;
+    height: 40px;
+    border: 1px solid white;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0px;
+}
+.comment {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.comments-section {
+    margin-top: 20px;
+}
+.forum{
+    margin: 20px;
+}
+
+nav a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+nav a.active {
+    border-bottom: 2px solid #ffd700;
+}
+
+input, textarea, button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #004080;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003060;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #004080;
+
+    @media (max-width: 768px) {
+    .section {
+        width: 100%;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        margin: 5px 0;
+    }
+}
+
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between; /* Distribui o conteúdo: texto à esquerda, botão à direita */
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #004080;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+</style>
 <body>
     <header>
         <h1>Grêmio Estudantil</h1>
@@ -15,85 +197,32 @@
         <a href="eventos.html">Eventos</a>
         <a href="projetos.html">Projetos</a>
         <a href="destaques.html">Alunos Destaque</a>
-        <a href="forum.html" class="active">Fórum</a>
+        <a href="forum.html">Fórum</a>
         <a href="contato.html">Contato</a>
     </nav>
     <div class="banner">
-        <h1>Fórum</h1>
-        <p>Debata temas relacionados ao Grêmio com outros usuários</p>
+        <h1>Forum</h1>
+        <p>Debata temas relacionadas ao Gremio com outros usuarios</p>
     </div>
-    <div class="forum">
-        <h1>Fórum de Discussão</h1>
-        <textarea id="comment" placeholder="Digite seu comentário" required></textarea>
-        <button onclick="addComment()">Adicionar Comentário</button>
-    </div>
+    
+        <div class="forum">
+            <h1>Fórum de Discussão</h1>
+            <textarea id="comment" placeholder="Digite seu comentário" required></textarea>
+            <button onclick="addComment()">Adicionar Comentário</button>
+        </div>
+
     <div class="comments-section forum" id="comments-section">
         <h2>Comentários</h2>
+        <span class="likes">0</span> <button onclick="likeComment(this)">Curtir</button>
     </div>
-<Script>const GITHUB_TOKEN = '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';
-const GITHUB_REPO = 'rikkiuwu/saveforum';
-const FILE_PATH = 'data/comments.json';
 
-// Função para obter o SHA do arquivo existente
-async function getFileSha(url) {
-    const response = await fetch(url, {
-        headers: { Authorization: `Bearer ${GITHUB_TOKEN}` }
-    });
-    if (response.ok) {
-        const data = await response.json();
-        return data.sha;
-    }
-    return null; // Arquivo inexistente
-}
-
-// Função para carregar comentários do GitHub
-async function loadCommentsFromGitHub() {
-    const url = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${FILE_PATH}`;
-    try {
-        const response = await fetch(url);
-        if (response.ok) {
-            const comments = await response.json();
-            localStorage.setItem('comments', JSON.stringify(comments)); // Armazena localmente
-            return comments;
-        }
-    } catch (error) {
-        console.error('Erro ao carregar comentários do GitHub:', error);
-    }
-    return [];
-}
-
-// Função para salvar comentários no GitHub
-async function saveCommentsToGitHub(comments) {
-    const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}`;
-    const fileContent = btoa(JSON.stringify(comments, null, 2)); // Codificar em base64
-    const sha = await getFileSha(apiUrl);
-
-    const response = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: 'Atualização de comentários',
-            content: fileContent,
-            sha: sha || null
-        })
-    });
-
-    if (response.ok) {
-        console.log('Comentários salvos no GitHub!');
-    } else {
-        console.error('Erro ao salvar no GitHub:', await response.json());
-    }
-}
-
-// Função para carregar comentários na interface
+    <script>
+   // Função para carregar os comentários armazenados no Local Storage
 function loadComments() {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
     const commentsSection = document.getElementById('comments-section');
 
-    // Limpa a seção de comentários
+    // Limpa a seção de comentários antes de adicionar os novos
     commentsSection.innerHTML = '<h2>Comentários</h2>';
 
     comments.forEach((comment, index) => {
@@ -109,55 +238,62 @@ function loadComments() {
     });
 }
 
-// Função para adicionar um comentário
-async function addComment() {
-    const username = localStorage.getItem('ra') || 'Usuário Anônimo';
+// Função para adicionar um novo comentário e salvar no Local Storage
+function addComment() {
+    const username = localStorage.getItem('ra'); // Recupera o nome do usuário do Local Storage
     const commentText = document.getElementById('comment').value;
 
-    if (commentText) {
+    if (username && commentText) {
         const currentDateTime = new Date().toLocaleString();
-        const newComment = { username, text: commentText, date: currentDateTime };
 
-        // Carregar comentários locais e adicionar o novo
+        // Cria o objeto do comentário
+        const newComment = {
+            username: username,
+            text: commentText,
+            date: currentDateTime
+        };
+
+        // Pega os comentários do Local Storage, ou um array vazio se não houver
         const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        
+        // Adiciona o novo comentário
         comments.push(newComment);
+
+        // Salva os comentários no Local Storage
         localStorage.setItem('comments', JSON.stringify(comments));
 
-        // Salvar no GitHub
-        await saveCommentsToGitHub(comments);
-
-        // Atualizar a interface
+        // Atualiza a seção de comentários
         loadComments();
+
+        // Limpa os campos
         document.getElementById('comment').value = '';
     } else {
-        alert('Erro: Comentário vazio.');
+        alert('Erro: Nome de usuário não encontrado ou comentário vazio.');
     }
 }
 
 // Função para excluir um comentário
-async function deleteComment(index) {
+function deleteComment(index) {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    comments.splice(index, 1);
-    localStorage.setItem('comments', JSON.stringify(comments));
-    await saveCommentsToGitHub(comments);
-    loadComments();
+    comments.splice(index, 1); // Remove o comentário do array
+    localStorage.setItem('comments', JSON.stringify(comments)); // Atualiza o Local Storage
+    loadComments(); // Recarrega os comentários
 }
 
-// Inicializar o fórum ao carregar a página
-window.onload = async () => {
+// Carrega os comentários quando a página for carregada
+window.onload = () => {
     const username = localStorage.getItem('ra');
     if (!username) {
         alert('Erro: Nome de usuário não encontrado. Faça login novamente.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html'; // Redireciona para a página de login
     } else {
-        const comments = await loadCommentsFromGitHub();
-        localStorage.setItem('comments', JSON.stringify(comments));
         loadComments();
     }
-};</script>
+};
+    </script>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
-    <script src="js/forum.js"></script>
+    <script src="js/teste1.js"></script>
 </body>
 </html>
