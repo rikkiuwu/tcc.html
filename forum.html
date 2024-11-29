@@ -217,10 +217,15 @@ button:hover {
     </div>
 
     <script>
-   // Função para carregar os comentários armazenados no Local Storage
+        // Exemplo de configuração do status de administrador no login
+localStorage.setItem('ra', 'admin'); // Nome do usuário
+localStorage.setItem('isAdmin', 'true'); // Status de administrador
+
+  // Função para carregar os comentários armazenados no Local Storage
 function loadComments() {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
     const commentsSection = document.getElementById('comments-section');
+    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Verifica se o usuário é admin
 
     // Limpa a seção de comentários antes de adicionar os novos
     commentsSection.innerHTML = '<h2>Comentários</h2>';
@@ -232,10 +237,27 @@ function loadComments() {
             <div>
                 <strong>${comment.username}</strong> (${comment.date}): ${comment.text}
             </div>
-            <button class="delete-button" onclick="deleteComment(${index})">Excluir</button>
+            ${
+                isAdmin
+                    ? `<button class="delete-button" onclick="deleteComment(${index})">Excluir</button>`
+                    : ''
+            }
         `;
         commentsSection.appendChild(commentDiv);
     });
+}
+
+// Função para excluir um comentário
+function deleteComment(index) {
+    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Verifica se o usuário é admin
+    if (isAdmin) {
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.splice(index, 1); // Remove o comentário do array
+        localStorage.setItem('comments', JSON.stringify(comments)); // Atualiza o Local Storage
+        loadComments(); // Recarrega os comentários
+    } else {
+        alert('Você não tem permissão para excluir comentários.');
+    }
 }
 
 // Função para adicionar um novo comentário e salvar no Local Storage
@@ -272,14 +294,6 @@ function addComment() {
     }
 }
 
-// Função para excluir um comentário
-function deleteComment(index) {
-    const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    comments.splice(index, 1); // Remove o comentário do array
-    localStorage.setItem('comments', JSON.stringify(comments)); // Atualiza o Local Storage
-    loadComments(); // Recarrega os comentários
-}
-
 // Carrega os comentários quando a página for carregada
 window.onload = () => {
     const username = localStorage.getItem('ra');
@@ -290,6 +304,7 @@ window.onload = () => {
         loadComments();
     }
 };
+
     </script>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
