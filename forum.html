@@ -290,6 +290,101 @@ window.onload = () => {
         loadComments();
     }
 };
+
+async function saveCommentsToGitHub(comments) {
+    const token = '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';
+    const repo = 'rikkiuwu/saveforum';
+    const filePath = 'data/comments.json';
+    const url = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+    
+    const fileContent = btoa(JSON.stringify(comments, null, 2)); // Codificar em base64
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: 'Atualização de comentários',
+            content: fileContent,
+            sha: await getFileSha(url, token)
+        })
+    });
+
+    if (response.ok) {
+        console.log('Comentários salvos no GitHub!');
+    } else {
+        console.error('Erro ao salvar no GitHub:', await response.json());
+    }
+}
+
+// Função auxiliar para obter SHA do arquivo existente
+async function getFileSha(url, token) {
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data.sha;
+    }
+    return null; // Arquivo inexistente
+}
+
+async function loadCommentsFromGitHub() {
+    const repo = 'rikkiuwu/saveforum';
+    const filePath = 'data/comments.json';
+    const url = `https://raw.githubusercontent.com/${repo}/main/${filePath}`;
+
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            const comments = await response.json();
+            localStorage.setItem('comments', JSON.stringify(comments)); // Armazena localmente
+            return comments;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar comentários do GitHub:', error);
+    }
+    return [];
+}
+
+// Carregar comentários do GitHub ao inicializar
+window.onload = async () => {
+    const username = localStorage.getItem('ra');
+    if (!username) {
+        alert('Erro: Nome de usuário não encontrado. Faça login novamente.');
+        window.location.href = 'login.html';
+    } else {
+        const comments = await loadCommentsFromGitHub();
+        localStorage.setItem('comments', JSON.stringify(comments));
+        loadComments(); // Atualiza a interface
+    }
+};
+
+// Salvar no GitHub sempre que adicionar um comentário
+async function addComment() {
+    const username = localStorage.getItem('ra');
+    const commentText = document.getElementById('comment').value;
+
+    if (username && commentText) {
+        const currentDateTime = new Date().toLocaleString();
+        const newComment = { username, text: commentText, date: currentDateTime };
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.push(newComment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+
+        // Salvar no GitHub
+        await saveCommentsToGitHub(comments);
+
+        loadComments(); // Atualiza a interface
+        document.getElementById('comment').value = '';
+    } else {
+        alert('Erro: Nome de usuário não encontrado ou comentário vazio.');
+    }
+}
+
     </script>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
