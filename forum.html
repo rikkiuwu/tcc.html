@@ -215,19 +215,52 @@ button:hover {
         <h2>Comentários</h2>
         <span class="likes">0</span> <button onclick="likeComment(this)">Curtir</button>
     </div>
-
     <script>
-        // Exemplo de configuração do status de administrador no login
-localStorage.setItem('ra', 'admin'); // Nome do usuário
-localStorage.setItem('isAdmin', 'true'); // Status de administrador
+// Verifica se o usuário está autenticado ao carregar a página
+window.onload = () => {
+    const storedName = localStorage.getItem('nome');
+    
+    if (!storedName) {
+        alert('Você não está autenticado. Faça login para acessar o fórum.');
+        window.location.href = 'login.html'; // Redireciona para o login
+        return;
+    }
 
-  // Função para carregar os comentários armazenados no Local Storage
-function loadComments() {
+    // Separa username e status de administrador
+    const [username, isAdmin] = parseUserInfo(storedName);
+
+    // Atualiza informações do usuário na interface
+    updateUserInfo(username, isAdmin);
+
+    // Carrega os comentários
+    loadComments(isAdmin);
+};
+
+// Função para separar o username e o status de administrador
+function parseUserInfo(storedName) {
+    const parts = storedName.split('|');
+    const username = parts[0];
+    const isAdmin = parts[0] === 'admin'; // Validação corrigida para verificar se o username é "admin"
+    return [username, isAdmin];
+}
+
+// Função para atualizar as informações do usuário na interface
+function updateUserInfo(username, isAdmin) {
+    const userInfoSection = document.getElementById('user-info');
+    if (userInfoSection) {
+        userInfoSection.innerHTML = `
+            <p>Bem-vindo, <strong>${username}</strong>!</p>
+            ${isAdmin ? '<p>Você tem privilégios de administrador.</p>' : ''}
+        `;
+    }
+}
+
+// Função para carregar os comentários
+function loadComments(isAdmin) {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
     const commentsSection = document.getElementById('comments-section');
-    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Verifica se o usuário é admin
 
-    // Limpa a seção de comentários antes de adicionar os novos
+    // Limpa a seção de comentários
     commentsSection.innerHTML = '<h2>Comentários</h2>';
 
     comments.forEach((comment, index) => {
@@ -237,78 +270,90 @@ function loadComments() {
             <div>
                 <strong>${comment.username}</strong> (${comment.date}): ${comment.text}
             </div>
-            ${
-                isAdmin
-                    ? `<button class="delete-button" onclick="deleteComment(${index})">Excluir</button>`
-                    : ''
-            }
+            <div>
+                <span class="likes">${comment.likes || 0}</span>
+                <button onclick="likeComment(${index})">Curtir</button>
+                ${
+                    isAdmin
+                        ? `<button class="delete-button" onclick="deleteComment(${index})">Excluir</button>`
+                        : ''
+                }
+            </div>
         `;
         commentsSection.appendChild(commentDiv);
     });
 }
 
-// Função para excluir um comentário
-function deleteComment(index) {
-    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Verifica se o usuário é admin
-    if (isAdmin) {
-        const comments = JSON.parse(localStorage.getItem('comments')) || [];
-        comments.splice(index, 1); // Remove o comentário do array
-        localStorage.setItem('comments', JSON.stringify(comments)); // Atualiza o Local Storage
-        loadComments(); // Recarrega os comentários
-    } else {
-        alert('Você não tem permissão para excluir comentários.');
-    }
-}
-
-// Função para adicionar um novo comentário e salvar no Local Storage
+// Função para adicionar um novo comentário
 function addComment() {
-    const username = localStorage.getItem('ra'); // Recupera o nome do usuário do Local Storage
+    const storedName = localStorage.getItem('nome');
+    if (!storedName) {
+        alert('Você não está autenticado.');
+        return;
+    }
+
+    const [username] = parseUserInfo(storedName); // Obtém apenas o nome
     const commentText = document.getElementById('comment').value;
 
-    if (username && commentText) {
-        const currentDateTime = new Date().toLocaleString();
+    if (!commentText.trim()) {
+        alert('Erro: Comentário vazio.');
+        return;
+    }
 
-        // Cria o objeto do comentário
-        const newComment = {
-            username: username,
-            text: commentText,
-            date: currentDateTime
-        };
+    const currentDateTime = new Date().toLocaleString();
 
-        // Pega os comentários do Local Storage, ou um array vazio se não houver
-        const comments = JSON.parse(localStorage.getItem('comments')) || [];
-        
-        // Adiciona o novo comentário
-        comments.push(newComment);
+    const newComment = {
+        username,
+        text: commentText.trim(),
+        date: currentDateTime,
+        likes: 0
+    };
 
-        // Salva os comentários no Local Storage
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push(newComment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+
+    const [, isAdmin] = parseUserInfo(storedName); // Obtém o status de administrador
+    loadComments(isAdmin); // Recarrega os comentários
+    document.getElementById('comment').value = ''; // Limpa o campo de texto
+}
+
+// Função para curtir um comentário
+function likeComment(index) {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    if (comments[index]) {
+        comments[index].likes = (comments[index].likes || 0) + 1;
         localStorage.setItem('comments', JSON.stringify(comments));
 
-        // Atualiza a seção de comentários
-        loadComments();
-
-        // Limpa os campos
-        document.getElementById('comment').value = '';
-    } else {
-        alert('Erro: Nome de usuário não encontrado ou comentário vazio.');
+        const storedName = localStorage.getItem('nome');
+        const [, isAdmin] = parseUserInfo(storedName); // Obtém o status de administrador
+        loadComments(isAdmin); // Recarrega os comentários
     }
 }
 
-// Carrega os comentários quando a página for carregada
-window.onload = () => {
-    const username = localStorage.getItem('ra');
-    if (!username) {
-        alert('Erro: Nome de usuário não encontrado. Faça login novamente.');
-        window.location.href = 'login.html'; // Redireciona para a página de login
-    } else {
-        loadComments();
+// Função para excluir um comentário
+function deleteComment(index) {
+    const storedName = localStorage.getItem('nome');
+    if (!storedName) {
+        alert('Você não está autenticado.');
+        return;
     }
-};
+
+    const [, isAdmin] = parseUserInfo(storedName); // Obtém apenas o status de administrador
+    if (!isAdmin) {
+        alert('Você não tem permissão para excluir comentários.');
+        return;
+    }
+
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.splice(index, 1);
+    localStorage.setItem('comments', JSON.stringify(comments));
+    loadComments(isAdmin); // Recarrega os comentários
+}
 
     </script>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
-    <script src="js/teste1.js"></script>
 </body>
 </html>
