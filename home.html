@@ -5,207 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grêmio Estudantil</title>
     <link rel="icon" href="img/logo.jpeg">
-    <link rel="stylesheet" href="css/EstiloHome.css">
-</head>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-}
-header {
-    background-color: hwb(0 86% 14%);
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
-header img {
-    max-width: 200px;
-    vertical-align: middle;
-}
-nav {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-nav a::after{
-    content: " ";
-    width: 100%;
-    height: 4px;
-    background-color: black;
-    position: relative;
-}
-.banner {
-    background-color: skyblue;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-}
-.banner h1 {
-    margin: 0;
-}
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
-.section {
-    background-color: white;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 20px;
-    width: 30%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.section h2 {
-    margin-top: 0;
-}
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
-}
-.redirect-box {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            background-color: hwb(0 86% 14%);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 200px;
+            vertical-align: middle;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .banner {
+            background-color: skyblue;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .banner h1 {
+            margin: 0;
+        }
+
+        .redirect-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espaço entre as caixas */
+            flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+            margin: 20px auto;
+            max-width: 1200px; /* Limita a largura da linha */
+        }
+
+        .redirect-box {
             border: 2px solid #007BFF;
             border-radius: 8px;
             padding: 20px;
             text-align: center;
             width: 300px;
-            margin: 20px auto;
             background-color: #f9f9f9;
-            cursor: pointer; /* Torna a caixa clicável */
+            cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .redirect-box:hover {
             background-color: #e6f7ff;
-            transform: scale(1.02); /* Efeito de zoom ao passar o mouse */
+            transform: scale(1.05);
         }
-nav a:hover {
-    color: blue;
-    text-decoration: underline;
-}
 
-#customAlert {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
 
-.alert-box {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-</style>
+        @media (max-width: 768px) {
+            .redirect-box {
+                width: 100%; /* Faz com que a largura ocupe a tela em dispositivos menores */
+            }
+        }
+    </style>
+</head>
 <body>
-    
     <header>
         <img src="img/logo.jpeg" alt="Logo do Grêmio">
         <h1>Grêmio Estudantil</h1>
     </header>
     <nav>
-        <a id="home">Home</a>
+        <a href="home.html">Home</a>
         <a href="eventos.html">Eventos</a>
         <a href="projetos.html">Projetos</a>
         <a href="destaques.html">Alunos Destaque</a>
         <a href="forum.html">Fórum</a>
         <a href="contato.html">Contato</a>
     </nav>
-    <div id="customAlert" style="display: none;">
-        <div class="alert-box">
-          <p id="alertMessage">Mensagem personalizada aqui!</p>
-          <button onclick="closeAlert()">OK</button>
-        </div>
-    </div>
     <div class="banner">
         <h1>Bem-vindos ao site do Grêmio Estudantil!</h1>
         <p>Fique por dentro de todos os eventos e projetos da escola</p>
     </div>
-    <section class="redirect-box" data-url="eventos.html">
-        <h1>Próximos Eventos</h1>
-        <p>Acompanhe os eventos que estão por vir e não perca nenhuma atividade!</p>
-    </section>
-    <section class="redirect-box" data-url="projetos.html">
-        <h1>Projetos em Destaque</h1>
-        <p>Conheça os projetos mais importantes que estamos desenvolvendo no momento.</p>
-    </section>
-    <section class="redirect-box" data-url="destaques.html">
-        <h1>Alunos Destaque</h1>
-        <p>Veja quem são os alunos com as melhores notas e maior destaque na escola.</p>
-    </section>
+    <div class="redirect-container">
+        <section class="redirect-box" data-url="eventos.html">
+            <h1>Próximos Eventos</h1>
+            <p>Acompanhe os eventos que estão por vir e não perca nenhuma atividade!</p>
+        </section>
+        <section class="redirect-box" data-url="projetos.html">
+            <h1>Projetos em Destaque</h1>
+            <p>Conheça os projetos mais importantes que estamos desenvolvendo no momento.</p>
+        </section>
+        <section class="redirect-box" data-url="destaques.html">
+            <h1>Alunos Destaque</h1>
+            <p>Veja quem são os alunos com as melhores notas e maior destaque na escola.</p>
+        </section>
+    </div>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
     <script>
-   // Obtém todas as caixas com a classe "redirect-box"
-const redirectBoxes = document.querySelectorAll('.redirect-box');
-
-// Adiciona um evento de clique a cada caixa
-redirectBoxes.forEach(box => {
-    box.addEventListener('click', function() {
-        // Obtém o URL armazenado no atributo "data-url" da caixa
-        const url = box.getAttribute('data-url');
-        if (url) {
-            window.location.href = url; // Redireciona para a URL
-        }
-    });
-});
-
-// Recupera o nome do usuário armazenado no localStorage
-let nome = localStorage.getItem('nome');
-
-// Aguarda o carregamento completo do DOM
-document.addEventListener('DOMContentLoaded', () => {
-    if (nome) {
-        // Recupera o último usuário que viu o alerta
-        const ultimoUsuario = localStorage.getItem('ultimoUsuario');
-
-        // Exibe o alerta se for um usuário diferente
-        if (nome !== ultimoUsuario) {
-            showAlert('Bem-vindo(a), ' + nome + '!');
-            localStorage.setItem('ultimoUsuario', nome); // Atualiza o último usuário
-        }
-    } else {
-        console.warn('Nenhum nome de usuário encontrado no localStorage.');
-    }
-});
-
-// Função para exibir o alerta personalizado
-function showAlert(message) {
-    // Define a mensagem
-    document.getElementById('alertMessage').textContent = message;
-    // Exibe o alerta
-    document.getElementById('customAlert').style.display = 'flex';
-}
-
-// Função para fechar o alerta
-function closeAlert() {
-    // Oculta o alerta
-    document.getElementById('customAlert').style.display = 'none';
-}
-
+        // Adiciona redirecionamento ao clicar nas caixas
+        document.querySelectorAll('.redirect-box').forEach(box => {
+            box.addEventListener('click', () => {
+                const url = box.dataset.url;
+                if (url) {
+                    window.location.href = url;
+                }
+            });
+        });
     </script>
 </body>
 </html>
