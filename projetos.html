@@ -5,96 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grêmio Estudantil</title>
     <link rel="icon" href="img/project.jfif">
-    <link rel="stylesheet" href="css/teste3.css">
-</head>
-<style>
-     body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-header {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .gremio {
     background-color: hwb(0 86% 14%);
     color: white;
-    padding: 10px 0;
+    padding: 31px 20px;
     text-align: center;
 }
-header img {
-    max-width: 50px;
-    vertical-align: middle;
-}
-nav {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-nav a::after{
-    content: " ";
-    width: 100%;
-    height: 4px;
-    background-color: black;
-    position: relative;
-}
-.banner {
-    background-color: skyblue;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-}
-.banner h1 {
-    margin: 0;
-}
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
-.section {
-    background-color: white;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 20px;
-    width: 30%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.section h2 {
-    margin-top: 0;
-}
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
-}
-.center{
-    text-align: center;
-}
-.projetos{
-    text-align: center;
-}
-img{
-    width: 550px;height: 400px;
-}
-nav a:hover {
+
+        nav {
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        .banner {
+            background-color: skyblue;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .banner h1 {
+            margin: 0;
+        }
+
+        .projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .projeto-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .projeto-item:hover {
+            transform: scale(1.05);
+        }
+
+        .projeto-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .projeto-item h2 {
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .projeto-item p {
+            margin: 0 15px 15px;
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                padding: 30px 15px;
+            }
+        }
+        nav a:hover {
     color: blue;
     text-decoration: underline;
 }
-</style>
+    </style>
+</head>
 <body>
-    <header>
+    <div class="gremio">
         <h1>Grêmio Estudantil</h1>
-    </header>
+    </div>
     <nav>
         <a href="home.html">Home</a>
         <a href="eventos.html">Eventos</a>
@@ -107,35 +120,40 @@ nav a:hover {
         <h1>Projetos</h1>
         <p>Descubra os projetos que serão realizados na sua escola!</p>
     </div>
-    <div class="projetos"><br></br>
-    <img src="img/arrecadacao.jfif" alt="Imagem">
-    <h1 class="center">Campanhas de Arrecadação:</h1>
-    <p>
-        Roupas, brinquedos, entre outros.
-    </p><br></br>
-    <img src="img/project.jfif" alt="Imagem">
-    <h1 class="center">Manifestações Culturais</h1>
-    <p>
-        Peças de teatro e teatro de fantoches.
-    </p>
-    <img src="img/project.jfif" alt="Imagem">
-    <h1 class="center">Interclasse</h1>
-    <p>
-        Interclasse duas vezes ao ano com atividades esportivas de vôlei e futboll
-    </p><br></br>
-    <video controls width="640" height="360" poster="imagem-poster.jpg">
-        <source src="img/video.mp4" type="video/mp4">
-        <source src="video.webm" type="video/webm">
-        Seu navegador não suporta a reprodução de vídeo.
-    </video><br></br>
-    <h1 class="center">Café Literário</h1>
-    <img src="img/cafe.jpeg" alt="Imagem">
-    <h1 class="center">Dia da Conciência Negra</h1>
-    <img src="img/conciencianegra3.jpeg" alt="Imagem">
+    <div class="projetos">
+        <div class="projeto-item">
+            <img src="img/box.png" alt="Campanhas de Arrecadação">
+            <h2>Campanhas de Arrecadação</h2>
+            <p>Participe da nossa campanha de arrecadação de roupas e alimentos! Contribua com itens essenciais, como alimentos não perecíveis e roupas em bom estado, que serão destinados a famílias em situação de vulnerabilidade. Juntos, podemos fazer a diferença! Confira os pontos de coleta e mais informações na seção de Projetos e Eventos. Sua solidariedade transforma vidas!</p>
+        </div>
+        <div class="projeto-item">
+            <img src="img/manifestacao.jpeg" alt="Manifestações Culturais">
+            <h2>Manifestações Culturais</h2>
+            <p>Peças de teatro e teatro de fantoches.</p>
+        </div>
+        <div class="projeto-item">
+            <img src="img/cafe.jpeg" alt="Café Literário">
+            <h2>Café Literário</h2>
+            <p>Encontros literários com discussões de obras e apresentações culturais.</p>
+        </div>
+        <div class="projeto-item">
+            <img src="img/culminancia.jpeg" alt="Dia da Consciência Negra">
+            <h2>culminãncia</h2>
+            <p>Comemorações e palestras para promover a igualdade racial e cultural.</p>
+        </div>
+        <div class="projeto-item">
+            <img src="img/arraia.jpeg" alt="Dia da Consciência Negra">
+            <h2>Arraiá Pagiossi</h2>
+            <p>Comemorações e palestras para promover a igualdade racial e cultural.</p>
+        </div>
+        <div class="projeto-item">
+            <img src="img/passeio.jpeg" alt="Dia da Consciência Negra">
+            <h2>Passeio Escolares</h2>
+            <p>Comemorações e palestras para promover a igualdade racial e cultural.</p>
+        </div>
     </div>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
-    <script src="js/teste1.js"></script>
 </body>
 </html>
