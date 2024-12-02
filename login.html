@@ -52,9 +52,9 @@
     <h1>H.I.D.C</h1>
     <h3>Grêmio Estudantil</h3>
     <div class="fic">Para entrar, utilize o mesmo login da SED</div><br></br>
-    <form onsubmit="return login(event)">
+    <form id="login-form">
         <div>
-        <input type="text" id="ra" placeholder="RA" style="text-align: left;width: 235px;" required>
+        <input type="text" id="nome" placeholder="Usuário" style="text-align: left;width: 235px;" required>
         <input type="text" id="digito" placeholder="Dígito" style="text-align: left;width: 35px;" required>-
         <select name="estados" id="" style="border: none;background-color: #FFFFFF; width:50px;height:30x;">
             <option value="sp">SP</option>
@@ -67,41 +67,35 @@
         </div>
         <input type="password" id="password" placeholder="Senha" style="width: 360px;" required><br></br>
         <button type="submit" style="width: 117px;background-color: #325794;" id="ra">Entrar</button><br></br>
-        <button type="submit" style="width: 117px;border: 4px; color: #325794; background-color: #FFFFFF; ">Voltar</button>
     </form>
     <p id="error-message" style="color: red; display: none;">Usuário ou senha incorretos</p>
 </div>
 
 <script>
-    function login(){
-        const username = document.getElementById('ra').value;
-        localStorage.setItem('ra', username);
-        window.location.href = 'forum.html';
-    }
-    function login(event) {
-        event.preventDefault();
-        const username = document.getElementById('ra').value;
-        localStorage.setItem('ra', username); // Armazena o username no localStorage
-        window.location.href = 'home.html'; // Redireciona para outra página
-        const password = document.getElementById('password').value;
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
-        const users = [
-        { username: "Luiz", password: "1234" },
-        { username: "luiz", password: "1234" },
-        { username: "Gabi", password: "Pietro03" },
-        { username: "gabi", password: "pietro03" },
-        { username: "Alessandra", password: "1234" },
-        { username: "alessandra", password: "1234" },
-        { username: "admin", password: "admin123" }
-    ];
+            const username = document.getElementById('nome').value;
+            const password = document.getElementById('password').value;
 
-    const validUser = users.find(user => user.username === username && user.password === password);
-    if (validUser) {
-        window.location.href = "home.html";
-    } else {
-        document.getElementById('error-message').style.display = 'block';
-    }
-}
+            // Lista de usuários cadastrados
+            const users = [
+                { username: "Usuario", password: "pagi123" },
+                { username: "admin", password: "admin123" }
+            ];
+
+            // Verifica se o usuário e a senha correspondem
+            const validUser = users.find(user => user.username === username && user.password === password);
+
+            if (validUser) {
+                // Armazena o usuário no localStorage e redireciona
+                localStorage.setItem('nome', username);
+                window.location.href = 'home.html';
+            } else {
+                // Exibe mensagem de erro
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
 </script>
 </body>
 </html>
