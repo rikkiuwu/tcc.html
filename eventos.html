@@ -5,39 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grêmio Estudantil</title>
     <link rel="stylesheet" href="css/EstiloEvento.css">
-</head>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-header {
-    background-color:hwb(0 86% 14%);
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
-header img {
-    max-width: 50px;
-    vertical-align: middle;
-}
-nav {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-.banner {
-    background-color:skyblue;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .gremio {
+            background-color: hwb(0 86% 14%);
+            color: white;
+            padding: 31px 20px;
+            text-align: center;
+        }
+        .banner {
+    background-color: skyblue;
     color: white;
     text-align: center;
     padding: 50px 20px;
@@ -45,46 +27,85 @@ nav a {
 .banner h1 {
     margin: 0;
 }
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
-.section {
-    background-color: white;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 20px;
-    width: 30%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.section h2 {
-    margin-top: 0;
-}
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
-}
-.events{
-    margin: 20px;
-    text-align: center;
-}
-img{
-    width: 700px;height: 400px;
-}
-nav a:hover {
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a::after{
+            content: " ";
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            position: relative;
+        }
+
+        .events {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 30px 20px;
+            background-color: #ffffff;
+        }
+
+        .event-card {
+            flex: 0 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .event-card img {
+            width: 100%;
+        }
+
+        .event-card h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 15px 10px;
+        }
+
+        .event-card p {
+            color: #666;
+            font-size: 1rem;
+            padding: 0 10px 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        nav a:hover {
     color: blue;
     text-decoration: underline;
 }
-</style>
+    </style>
+</head>
 <body>
-    <header>
+    <div class="gremio">
         <h1>Grêmio Estudantil</h1>
-    </header>
+    </div>
     <nav>
         <a href="home.html">Home</a>
         <a href="eventos.html">Eventos</a>
@@ -95,23 +116,42 @@ nav a:hover {
     </nav>
     <div class="banner">
         <h1>Eventos</h1>
-        <p>Fique atento aos eventos da sua escola!</p>
-    </div><br></br>
+        <p>Confira os eventos marcantes da sua escola!</p>
+    </div>
     <div class="events">
-        <img src="img/gincana.jpeg" alt="Imagem">
-       <h1>1. Gincana</h1>
-       <img src="img/project.jfif" alt="Imagem">
-       <h1>2. Interclasses</h1>
-       <img src="img/project.jfif" alt="Imagem">
-       <h1>3.</h1>
-       <img src="img/project.jfif" alt="Imagem">
-       <h1>4. </h1>
-       <img src="img/project.jfif" alt="Imagem">
-       <h1>5. </h1>
+        <div class="event-card">
+            <img src="img/gincana.jpeg" alt="Imagem da Gincana">
+            <h2>Gincana</h2>
+            <p>Uma gincana cheia de desafios, brincadeiras e aprendizado para todos!</p>
+        </div>
+        <div class="event-card">
+            <img src="img/inter.jpg" alt="Imagem do Interclasse">
+            <h2>Interclasse</h2>
+            <p>Competições de esportes para promover trabalho em equipe e diversão.</p>
+        </div>
+        <div class="event-card">
+            <img src="img/prova0.jpeg" alt="Café Literário">
+            <h2>Provão Paulista (Avisos)</h2>
+            <p>Fique atento</p>
+        </div>
+        <div class="event-card">
+            <img src="img/prova1.jpeg" alt="Café Literário">
+            <h2>Provão Paulista 1ªSérie</h2>
+            <p>Encontros para compartilhar literatura e cultura com alunos e professores.</p>
+        </div>
+        <div class="event-card">
+            <img src="img/prova2.jpeg" alt="Café Literário">
+            <h2>Provão Paulista 2ªSérie</h2>
+            <p>Encontros para compartilhar literatura e cultura com alunos e professores.</p>
+        </div>
+        <div class="event-card">
+            <img src="img/premios.jpeg" alt="Café Literário">
+            <h2>Show de Prêmios</h2>
+            <p>Encontros para compartilhar literatura e cultura com alunos e professores.</p>
+        </div>
     </div>
     <footer>
         <p>&copy; 2024 Grêmio Estudantil - Todos os direitos reservados.</p>
     </footer>
-    <script src="js/teste1.js"></script>
 </body>
 </html>
